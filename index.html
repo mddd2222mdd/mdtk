@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Login - EBEE TOOLKIT 2.0</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .login-container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 245, 0.8);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        h1 {
+            font-size: 2em;
+            text-transform: uppercase;
+            color: #00fff5;
+            text-shadow: 0 0 20px rgba(0, 255, 245, 1);
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #00fff5;
+            margin-bottom: 20px;
+        }
+
+        .activation-key-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .activation-key {
+            padding: 15px;
+            width: calc(100% - 40px);
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            font-size: 1.5em;
+            background-color: #0f2027;
+            color: #00fff5;
+            box-shadow: 0 0 20px rgba(0, 255, 245, 0.8);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .copy-btn {
+            position: absolute;
+            right: 2.5px;
+            top: 40%;
+            transform: translateY(-50%);
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .copy-btn img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .submit-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            background-color: #00fff5;
+            color: #0f2027;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .submit-btn:hover {
+            background-color: #00d4d4;
+            box-shadow: 0 0 20px rgba(0, 212, 212, 0.8);
+        }
+
+        .redirect-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 50px;
+            background-color: #00fff5;
+            color: #0f2027;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .redirect-btn:hover {
+            background-color: #00d4d4;
+            box-shadow: 0 0 20px rgba(0, 212, 212, 0.8);
+        }
+
+        footer {
+            font-size: 0.9em;
+            color: #00fff5;
+            margin-top: 20px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+    </style>
+    <!-- Import Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDMy6--svGEXxLtwQ-ROJmtDQwKgnkKl0Y",
+            authDomain: "acthv-f0cd3.firebaseapp.com",
+            databaseURL: "https://acthv-f0cd3-default-rtdb.firebaseio.com",
+            projectId: "acthv-f0cd3",
+            storageBucket: "acthv-f0cd3.appspot.com",
+            messagingSenderId: "51412717184",
+            appId: "1:51412717184:web:f2e03ac5e86930ec23a065"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        function generateUniqueKey() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let key = '';
+            for (let i = 0; i < 10; i++) {
+                key += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return key;
+        }
+
+        function getActivationKey() {
+            let activationKey = localStorage.getItem('activationKey');
+            if (!activationKey) {
+                activationKey = generateUniqueKey();
+                localStorage.setItem('activationKey', activationKey);
+            }
+            return activationKey;
+        }
+
+        function copyActivationKey() {
+            const activationKey = getActivationKey();
+            navigator.clipboard.writeText(activationKey)
+                .then(() => {
+                    alert('Activation key copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Unable to copy activation key: ', err);
+                });
+        }
+
+        async function checkActivationKey() {
+            const enteredKey = document.getElementById('activationKey').value.trim();
+            const dbRef = ref(database, 'keys/' + enteredKey);
+            try {
+                const snapshot = await get(dbRef);
+                if (snapshot.exists()) {
+                    window.location.href = 'dont_copy_this_virus.aspx.java.ktc.html';
+                } else {
+                    document.getElementById('errorMessage').textContent = 'YOUR KEY IS NOT ACTIVATED';
+                }
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+                document.getElementById('errorMessage').textContent = 'An error occurred. Please try again later.';
+            }
+        }
+
+        function redirectToSample() {
+            window.location.href = 'sample.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('activationKey').value = getActivationKey();
+        });
+
+        window.copyActivationKey = copyActivationKey;
+        window.checkActivationKey = checkActivationKey;
+        window.redirectToSample = redirectToSample;
+    </script>
+</head>
+<body>
+
+<div class="login-container">
+    <h1>Welcome to EBEE TOOLKIT 2.0</h1>
+    <p>The Super Powerful TOOLKIT Ever Made By AtomCyberForce 🇵🇸</p>
+    <div class="activation-key-container">
+        <input type="text" id="activationKey" class="activation-key" readonly>
+        <button class="copy-btn" onclick="copyActivationKey()">
+            <img src="https://img.icons8.com/ios-filled/50/00fff5/copy.png" alt="Copy Icon">
+        </button>
+    </div>
+    <button class="submit-btn" onclick="checkActivationKey()">Submit</button>
+    <button class="redirect-btn" onclick="redirectToSample()">Sample Page</button>
+    <p class="error-message" id="errorMessage"></p>
+    <p>This Is An Project In PartnerShip With Aden Tech And AtomCyberForce</p>
+    <footer>To activate your key, contact +92 344 306 2524</footer>
+</div>
+
+</body>
+</html>

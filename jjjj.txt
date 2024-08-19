@@ -1,0 +1,36 @@
+﻿🔺 INSTAGRAM/FACEBOOK ACCOUNT CRACKING TOOL
+🔻
+
+👉 This is a tool that will help you crack Instagram/Facebook account very quickly.
+
+✅Installation 
+
+•  apt-get update
+
+•  apt-get upgrade
+
+•  apt-get install git
+
+•  apt-get install python
+
+•  apt-get install figlet
+
+•  apt-get install python-pip
+
+•  pip install telegram
+
+•  pip install python-telegram-bot
+
+•  pip install telegram-bot
+
+•  git clone https://github.com/Master-Bruno/FB-INSTA
+
+•  cd FB-INSTA
+
+•  git pull
+
+•  chmod +x *
+
+•  python INSTA-FB7.py
+
+✅ Installed successfully

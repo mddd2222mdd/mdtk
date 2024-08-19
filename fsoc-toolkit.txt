@@ -1,0 +1,42 @@
+﻿> *⚠️  FSOCIETY TOOLKIT  🚫*
+
+
+*🔰 ABOUT TOOL 🔰*
+
+ If you get to this point, you can assume that you are lucky, now we will install a repository in which all the Penetration Testing Tools have appeared on the Mr. Robot Series. 
+
+
+*🔰 FEATURES 🔰*
+
+▪️ Information Gathering
+▪️ Password Attacks      
+▪️ Wireless attack
+▪️ Sniffing & Spoofing
+▪️ Web Hacking
+▪️ Private Web Hacking
+▪️ Post Exploitation
+
+*🔰 INSTALL WITH  TERMUX 🔰*
+
+• apt update
+
+• apt upgrade
+
+• pkg install git -y 
+
+• pkg install wget -y
+
+• pkg install python2
+
+• git clone https://github.com/Manisso/fsociety.git
+
+• cd fsociety
+
+• chmod +x install.sh 
+
+• python2 fsociety.py
+
+
+> *🚫 DISCLAIMER 🚫*
+
+*This Tool is Only for Educational Purpose ⚠️❗️*

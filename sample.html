@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBEE-TOOLKIT 2.0</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        header, footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid #00fff5;
+        }
+
+        h1 {
+            font-size: 1.6em;
+            margin: 0;
+            text-transform: uppercase;
+            color: #00fff5;
+            text-shadow: 0 0 20px rgba(0, 255, 245, 1);
+        }
+
+        .search-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        #toolSearch {
+            padding: 15px;
+            width: 80%;
+            max-width: 600px;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            font-size: 1.5em;
+            background-color: #0f2027;
+            color: #00fff5;
+            box-shadow: 0 0 20px rgba(0, 255, 245, 0.8);
+            text-align: center;
+        }
+
+        .tool-options-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .tool-option {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 255, 245, 0.1);
+            border: 2px solid #00fff5;
+            border-radius: 10px;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            opacity: 0;
+        }
+
+        .tool-option img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            margin-right: 20px;
+            box-shadow: 0 0 15px rgba(0, 255, 245, 0.5);
+        }
+
+        .tool-option span {
+            font-size: 1.2em;
+            color: #00fff5;
+        }
+
+        footer {
+            font-size: 0.9em;
+            color: #00fff5;
+        }
+
+        p {
+            text-align: center;
+            font-size: 0.9em;
+            color: #00fff5;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.1s forwards;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.1s forwards;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border: 2px solid #00fff5;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 245, 1);
+            text-align: center;
+            z-index: 1000;
+          width: 300;
+        }
+
+        .popup p {
+            font-size: 1.8em;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>(EBEE-TOOLKIT 2.0)<br>Its A Sample Page</h1>
+</header>
+<p>A PROJECT BY ATOMCYBERFORCE 🇵🇸</p>
+
+<div class="search-container">
+    <input type="text" id="toolSearch" placeholder="Search tools...">
+</div>
+
+<div class="tool-options-container" id="toolOptions">
+    <div class="tool-option" data-url="https://ebeetool.netlify.app/tool.html" onclick="showPopup()">
+        <img src="ebee.jpg" alt="Example Tool 1">
+        <span>EBEE TOOLKIT 1.0</span>
+    </div>
+    <div class="tool-option" data-url="https://example.com/tool2" onclick="showPopup()">
+        <img src="fb.jpg" alt="Example Tool 2">
+        <span>Kashif Majeed FB Course</span>
+    </div>
+    <div class="tool-option" data-url="https://drive.google.com/drive/folders/1wjxulWhuQQMfprEu8aospNNaOueSVrUc?usp=drive_link" onclick="showPopup()">
+        <img src="igh.jpg" alt="Example Tool 3">
+        <span>InstaGram Hacking Method</span>
+    </div>
+    <div class="tool-option" data-url="https://drive.google.com/drive/folders/1IJ41uo9in4Cwg2NjoHgC-SBfvITw4RDP?usp=drive_link" onclick="showPopup()">
+        <img src="tg.jpg" alt="Example Tool 4">
+        <span>Telegram Hacking Method</span>
+    </div>
+    <div class="tool-option" data-url="https://mega.nz/file/G3oWFBpb#oWDTvDqx7uYUZk4yHRI3RI2MAhLPuWrc38chhJNiIZY" onclick="showPopup()">
+        <img src="rl.jpg" alt="Example Tool 5">
+        <span>1000+ Natures Reels</span>
+    </div>
+    <div class="tool-option" data-url="jjjj.txt" onclick="showPopup()">
+        <img src="crc.jpeg" alt="Example Tool 6">
+        <span>Instagram/FB Cracking Method</span>
+    </div>
+    <div class="tool-option" data-url="Fb-auto-commentor.txt" onclick="showPopup()">
+        <img src="fbc.jpg" alt="Example Tool 7">
+        <span>Facebook Auto Unlimited Commentor</span>
+    </div>
+    <div class="tool-option" data-url="rdp.txt" onclick="showPopup()">
+        <img src="rdp.png" alt="Example Tool 8">
+        <span>12 Hour RDP Method</span>
+    </div>
+    <div class="tool-option" data-url="https://mega.nz/folder/Y303gIwK#jGpyWnfHpD2BAtKEKeW0MA" onclick="showPopup()">
+        <img src="chrome.jpg" alt="Example Tool 9">
+        <span>Unlimited Chrome Profile Genreator</span>
+    </div>
+    <div class="tool-option" data-url="https://drive.google.com/drive/folders/1AAIDWsWRFvFeRssFpmHwxRmuiV5FtshN?usp=sharing" onclick="showPopup()">
+        <img src="4d.jpg" alt="Example Tool 10">
+        <span>4D CopyWriting Academy</span>
+    </div>
+    <div class="tool-option" data-url="v/index.html" onclick="showPopup()">
+        <img src="c.jpg" alt="Example Tool 11">
+        <span>EBEE Courses Mart</span>
+    </div>
+    <div class="tool-option" data-url="gta.txt" onclick="showPopup()">
+        <img src="gta.jpg" alt="Example Tool 12">
+        <span>GTA San Andreas</span>
+    </div>
+    <div class="tool-option" data-url="https://drive.google.com/drive/folders/163BJiJhQNQJ0b9lTAf0RQNoKsb4F_ivK?usp=sharing" onclick="showPopup()">
+      <img src="com.png" alt="Example Tool 13">
+        <span>E-Com Sugent Amazon Course</span>
+    </div>
+    <div class="tool-option" data-url="https://github.com/usmanneo/safeum.git" onclick="showPopup()">
+        <img src="su.webp" alt="Example Tool 14">
+        <span>SafeUM Unlimited Account Script</span>
+    </div>
+    <div class="tool-option" data-url="https://drive.google.com/drive/folders/11GqWM_-B0mbtX58lpfY8jfUyWMV_jJRB?usp=sharing" onclick="showPopup()">
+        <img src="dd.png" alt="Example Tool 15">
+        <span>PowerFul DDOS Tool</span>
+    </div>
+    <div class="tool-option" data-url="https://gamitisa.com/tools/" onclick="showPopup()">
+        <img src="gmm.jpeg" alt="Example Tool 16">
+        <span>Super-PowerFull Tools</span>
+    </div>
+    <div class="tool-option" data-url="http://funon.pk/" onclick="showPopup()">
+        <img src="soft.jpg" alt="Example Tool 17">
+        <span>All Premium Software</span>
+    </div>
+    <div class="tool-option" data-url="db.txt" onclick="showPopup()">
+        <img src="dp.webp" alt="Example Tool 18">
+        <span>10+ DarkWeb Onion Links</span>
+    </div>
+    <div class="tool-option" data-url="https://jphgpt.vercel.app/" onclick="showPopup()">
+        <img src="gpt.jpg" alt="Example Tool 19">
+        <span>Premium ChatGPT</span>
+    </div>
+    <div class="tool-option" data-url="v/hc.txt" onclick="showPopup()">
+        <img src="ee.jpeg" alt="Example Tool 20">
+        <span>Full Ethical Hacking Course (With Pass)</span>
+    </div>
+    <div class="tool-option" data-url="https://www.proinvitelinks.com/" onclick="showPopup()">
+        <img src="cnv.jpg" alt="Example Tool 21">
+        <span>Unlimited Canva Pro</span>
+    </div>
+    <div class="tool-option" data-url="v/dork.txt" onclick="showPopup()">
+        <img src="vd.jpeg" alt="Example Tool 22">
+        <span>Search AnonFiles On Google Dork</span>
+    </div>
+    <div class="tool-option" data-url="editing-pack.html" onclick="showPopup()">
+        <img src="ep.jpg" alt="Example Tool 23">
+        <span>100TB+ Editing Pack</span>
+    </div>
+    <div class="tool-option" data-url="dark-web.html" onclick="showPopup()">
+        <img src="bc.jpg" alt="Example Tool 24">
+        <span>Dark Web Complete Course</span>
+    </div>
+    <div class="tool-option" data-url="wordpress-theme.html" onclick="showPopup()">
+        <img src="theme.jpg" alt="Example Tool 25">
+        <span>500+ Paid WordPress Themes</span>
+    </div>
+    <div class="tool-option" data-url="adhac.html" onclick="showPopup()">
+        <img src="dragon_1.jpeg" alt="Example Tool 26">
+        <span>Andriod Hacking App Collections</span>
+    </div>
+    <div class="tool-option" data-url="https://10drives.com/b/drOyxkOydxEOybka" onclick="showPopup()">
+        <img src="jj.jpg" alt="Example Tool 27">
+        <span>Fake Whatsapp Chat Maker</span>
+    </div>
+    <div class="tool-option" data-url="https://www.mediafire.com/file/vchzv7j96o4e8li/YouTube_Video_Bypass_Method_With_Software.rar/file" onclick="showPopup()">
+        <img src="cyt.jpg" alt="Example Tool 28">
+        <span>YouTube Copyright Bypass Software</span>
+    </div>
+    <div class="tool-option" data-url="https://drive.google.com/drive/folders/1BjJlNOGbgAmkJgD7ECWzEwLKtzkwjBlb" onclick="showPopup()">
+        <img src="sch.jpeg" alt="Example Tool 29">
+        <span>Sheikh Zaheer Abbas Courses</span>
+    </div>
+    <div class="tool-option" data-url="https://www.checker.top/" onclick="showPopup()">
+        <img src="cc.jpg" alt="Example Tool 30">
+        <span>Live Credit Card Checker</span>
+    </div>
+    <div class="tool-option" data-url="https://www.fakexy.com/" onclick="showPopup()">
+        <img src="fb.jpg" alt="Example Tool 31">
+        <span>Fake Address Genreator</span>
+    </div>
+    <div class="tool-option" data-url="https://drive.google.com/drive/folders/18evjnwemLIDP6J4YOlRRqNBFunw7Yh5m" onclick="showPopup()">
+        <img src="apk.png" alt="Example Tool 32">
+        <span>Premium APK Bundle</span>
+    </div>
+    <div class="tool-option" data-url="https://example.com/tool2" onclick="showPopup()">
+        <img src="fb.jpg" alt="Example Tool 33">
+        <span>Kashif Majeed FB Course</span>
+    </div>
+</div>
+
+<footer>
+    <p>We are not responsible for any misuse of these tools. Use at your own risk.</p>
+</footer>
+
+<div class="overlay"></div>
+<div class="popup">
+    <p>YOUR KEY IS NOT ACTIVATED PLEASE ACTIVATE TO USE THIS OPTION</p>
+</div>
+
+<script>
+    function showPopup() {
+    document.querySelector('.overlay').style.display = 'block';
+    document.querySelector('.popup').style.display = 'block';
+    setTimeout(function() {
+        window.location.href = 'index.html';
+    }, 3500);
+}
+
+    // Search functionality
+    document.getElementById('toolSearch').addEventListener('input', function () {
+        const filter = this.value.toLowerCase();
+        const toolOptions = document.getElementsByClassName('tool-option');
+        
+        for (let i = 0; i < toolOptions.length; i++) {
+            const option = toolOptions[i];
+            const text = option.textContent || option.innerText;
+            if (text.toLowerCase().includes(filter)) {
+                option.style.display = "";
+            } else {
+                option.style.display = "none";
+            }
+        }
+    });
+
+    // Scroll animations
+    document.addEventListener('scroll', function () {
+        const toolOptions = document.querySelectorAll('.tool-option');
+        let delay = 0;
+
+        toolOptions.forEach((option, index) => {
+            const rect = option.getBoundingClientRect();
+            if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                setTimeout(() => {
+                    option.style.opacity = '1';
+                    option.classList.add(index % 2 === 0 ? 'slide-in-left' : 'slide-in-right');
+                }, delay);
+                delay += 150;
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

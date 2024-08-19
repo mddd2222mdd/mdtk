@@ -1,0 +1,23 @@
+﻿12 hours Rdp method.txt
+
+1 Step Start This Link :
+
+https://shell.cloud.google.com/?fromcloudshell=true&show=terminal&pli=1
+
+
+
+2nd Step Link Copy nd paste It : 
+
+curl -sLkO https://is.gd/nomachinewindows10 ; bash nomachinewindows10
+
+
+
+3rd Step Link :
+
+https://ngrok.com/
+
+
+
+2th Step Link :
+
+https://www.nomachine.com/

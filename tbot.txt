@@ -1,0 +1,18 @@
+﻿🙂‍↕ *TBOT* 
+
+TBOT WITH BEST TOOLS 
+
+ *INSTALLATION* :
+
+• pkg update
+
+• pkg install wget -y
+
+• wget -O $PREFIX/bin/tbot https://raw.githubusercontent.com/TecnicalBot/tbot/main/tbot.sh rb.gy/o6w92n
+
+• chmod +x $PREFIX/bin/tbot
+
+• tbot 
+
+`Termux tools are for educational use only. For more information about this tool, visit the GitHub link.`
+

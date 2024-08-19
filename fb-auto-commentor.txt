@@ -1,0 +1,20 @@
+﻿*Facebook Post Auto Comment* 😉
+
+About
+● FB Auto Comment
+● For Termux Users
+
+Installation Commands :-
+
+apt update && apt upgrade -y
+pkg install git
+pkg install python
+pip install requests
+pip install bs4
+rm -rf Comment
+git clone --depth=1 https://github.com/U7P4L-IN/Comment.git rb.gy/o6w92n
+cd Comment
+chmod +x *
+python main.py
+
+Done
