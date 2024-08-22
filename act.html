@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Activator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+        }
+        input[type="button"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+         .p {
+            margin-top: 20px;
+            font-size: 18px;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="keyInput" placeholder="Paste key here">
+        <input type="button" value="Submit" onclick="submitKey()">
+        <div class="message" id="message"></div>
+        <p><b>EBEE TOOLKIT KEY ACTIVATOR BY EBEE BHAI</b></p>
+    </div>
+ 
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+ 
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCoNaRDySKBAgEWCF9PgjUZ8NYT7fDyyYU",
+            authDomain: "mdtoolkit-911f1.firebaseapp.com",
+            projectId: "mdtoolkit-911f1",
+            storageBucket: "mdtoolkit-911f1.appspot.com",
+             messagingSenderId: "16439117722",
+            appId: "1:16439117722:web:809e9b9664ef5ab7549c23"
+        };
+ 
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+ 
+        // Define submitKey function globally
+        window.submitKey = function() {
+            const key = document.getElementById('keyInput').value;
+            if (key.trim() === "") {
+                alert("Please enter a key");
+                return;
+            }
+ 
+            // Log key value for debugging
+            console.log('Key to submit:', key);
+ 
+            // Reference to the database path where you want to store the key
+            const keyRef = ref(database, 'keys/' + key);
+ 
+            // Set the key value in the database
+            set(keyRef, {
+                activated: true
+            }).then(() => {
+                document.getElementById('message').innerText = "THE KEY HAS BEEN ACTIVATED";
+                document.getElementById('keyInput').value = ""; // Clear the input field
+            }).catch((error) => {
+                console.error("Error writing to database: ", error);
+                document.getElementById('message').innerText = "Error activating key";
+            });
+        }
+    </script>
+</body>
+</html>
